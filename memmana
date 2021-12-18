@@ -1,0 +1,148 @@
+package sanjocode;
+
+import java.util.Scanner;
+import sanjocode.member;
+	
+	public class memberMana{
+		private Scanner sc = new Scanner(System.in);//멤버 변수로 학생, 교수, 교직원 정보를 저장
+		private member members [];// 매개변수 Person persons배열을 생성합니다.
+
+		private String name, ssn, ID, Passward ;//멤버의 상속을 받음
+		private int age;
+		private int index; //저희가 생성한 학생의 정보를 index에 넣습니다.
+		
+		public memberMana(int cap){	
+			members = new member[cap];
+				 }
+		//배열 생성때 값을 지정해줘도 되지만 
+		//우리가 유동적으로 사용하기 위해서 cap값을 사용했습니다.
+		
+		public boolean addmem(member m) {//학생 등록겸 민증 중복오류 코드입니다.
+			boolean result = false;//참거짓 따지기전에 false 설정 합니다.
+			for(int i = 0 ; i<index; i++) {
+			//배열을 펼칩니다. 여기서 저희는 make에서 만든 사람들을 인덱스에 넣기 때문에 인덱스 미만만큼 펼칩니다.
+			if(members[i].getSSN().equals(m.getSSN())) {
+				System.out.println("주민등록번호가 겹칩니다!");
+				return result;
+				//다시 거짓으로 돌아갑니다.
+			}
+		}	
+			members[index++] = m;
+			result = true;
+			return result;
+			//그게 아니라면 펄슨스 배열에 인덱스를 추가시키고 참으로 반환합니다.
+	}
+	
+		public boolean addid(member m) {//학생 등록겸 민증 중복오류 코드입니다.
+			boolean result = false;//참거짓 따지기전에 false 설정 합니다.
+			for(int i = 0 ; i<index; i++) {
+			//배열을 펼칩니다. 여기서 저희는 make에서 만든 사람들을 인덱스에 넣기 때문에 인덱스 미만만큼 펼칩니다.
+			if(members[i].getID().equals(m.getID())) {
+				System.out.println("아이디가 겹칩니다!");
+				return result;
+				//다시 거짓으로 돌아갑니다.
+			}
+		}	
+			members[index++] = m;
+			result = true;
+			return result;
+			//그게 아니라면 펄슨스 배열에 인덱스를 추가시키고 참으로 반환합니다.
+	}
+		
+		public member findmember(String Passward) {
+			//아이디 받아서 비밀번호 사람찾는 코드입니다.
+			member result = null;
+			//결과값을 널값으로 초기화 시켜줍니다.
+			for(int i = 0 ; i<index; i++) {
+				if(members[i].getPassward().equals(Passward)) {
+			//똑같이 배열을 펼친뒤에 만약 입력한 민증번호가 배열안에 있는 i의 민증과 같을경우
+					result = members[i];
+			//결과는 persons[i]로 바뀌어서 보내주게 됩니다.
+					System.out.println(members[i]);
+					break;
+				}
+			}
+			
+			return result;
+		}
+		public boolean deletemember(String ssn) {
+			boolean result = false;
+			//사람삭제입니다 참 거짓을 받아야하기 때문에 false로 하였습니다.
+			for(int i = 0 ; i<index; i++) {
+				if(members[i].getSSN().equals(ssn)) {
+					int end = index;
+					if(index == members.length)
+						end -=1;
+				//여기서 민증번호가 같은 인덱스값을 하나 빼줌으로써 값을 지웁니다.
+					for(int j = i ; j<end; j++) {
+						members[j]=members[j++];
+					}
+				//그다음 밑에 j의 배열을 하나 펼친다음에 j=i값을 설정하고 j는 i와같이 인덱스 미만으로 돌고 
+				//j를 옆칸으로 이동시켜줍니다.
+				result =true;
+				index--;
+				//하나 삭제했으므로 index--가 됩니다.
+				break;
+				}
+				
+			}
+			return result;
+		}
+	public void memberLoginEx(){ // 회원로그인용 메소드
+		Scanner sc = new Scanner(System.in);
+		while(true) {
+		System.out.print("아이디 : "); String ID = sc.nextLine();
+		System.out.print("패스워드 : "); String Passward = sc.nextLine();
+		for (int i = 0 ; i < index ; i++)
+		{
+			if (members[i].getID().equals(ID) && members[i].getPassward().equals(Passward))
+			{
+				System.out.println("환영합니다.");
+				System.out.println("로그인에 성공하였습니다. \n");
+			return ;
+			}else if (!members[i].getID().equals(ID))
+			{
+				System.out.println("존재하지 않는 아이디입니다. \n");
+			}
+			else if (members[i].getID().equals(ID) && !members[i].getPassward().equals(Passward))
+			{
+				System.out.println("암호가 잘못되었습니다. \n");
+			}	
+		}
+	}
+}
+
+	
+
+
+		private void commonInput() {
+			System.out.println("이름을 입력하세요 :");
+			 name = sc.next();
+			System.out.println("나이를 입력하세요 :");
+			 age = sc.nextInt();
+			System.out.println("주민번호를 입력하세요 :");
+			 ssn = sc.next();
+			
+		}
+		
+		public member[] getAllPersons() {
+			return members;
+			}
+		
+		//현재 등록된 데이터의 개수 반환
+		public int getPersonsLE() {
+			return index;
+		}
+		//키보드로 학생 정보를 입력 받아 Student 객체를 생성하여 반환한다.
+		//키보드로 이름 뭐 나이 뭐 주번 뭐 학번 뭐 를 받아서 객체를 생성합니다.
+		public member makeidPa() {
+			member M1 = null;		
+			commonInput();
+			System.out.println("생성하실 아이디를 입력해주세요 :");
+			ID = sc.next();			
+			System.out.println("비밀번호를 입력해주세요 :");
+			Passward = sc.next();	
+			M1=  new member(name, ssn, age, ID, Passward);	
+			return M1;
+		}
+	}
