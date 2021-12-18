@@ -1,0 +1,45 @@
+package sanjocode;
+
+public class member {
+	private String name;
+	private String SSN;
+	private	int age;
+	private String ID;
+	private String Passward;
+	
+	public member(String name, String sSN, int age, String ID, String Passward) {
+		super();
+		this.name = name;
+		this.SSN = sSN;
+		this.age = age;
+		this.ID = ID;
+		this.Passward = Passward;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getSSN() {
+		return SSN;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public void shoinfo() {
+		System.out.printf("이름 : %s, 나이 %d , 주민번호: %s %n",name,age,SSN);
+	}
+	public String getID() {
+		return ID;
+	}
+	public String getPassward() {
+		return Passward;
+	}
+	public void setPassward(String passward) {
+		Passward = passward;
+	}
+}
