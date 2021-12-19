@@ -1,0 +1,7 @@
+package day16.clases;
+
+public interface MYnumber {
+
+	int getMaxNumber(int num1 , int num2);
+	
+}
