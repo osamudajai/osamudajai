@@ -1,0 +1,62 @@
+package day16.clases;
+import java.util.ArrayList;
+
+class Outclass{
+	private int num=10;
+	private static int sNum=20;
+	private Inclass inclass;
+	private ArrayList list;
+	
+	public Outclass(){
+		inclass = new Inclass();
+	}
+	class Inclass{//인스턴트
+		int innum = 200;
+		void inTest() {
+			System.out.println(num);
+			System.out.println(sNum);
+		}
+		
+	}
+	
+	public void usinginTest()	{
+		inclass.inTest();
+	}
+	
+	
+	static class Instaticclass{
+		int iinum = 400;
+		static int iiinum = 200;
+		
+		void inTest() {
+			sNum +=10;
+			System.out.println(sNum);
+			System.out.println(iinum);
+			System.out.println(iiinum);
+		}
+		
+		static void sTest() {
+			System.out.println(sNum);
+			System.out.println(iiinum);
+		}
+	}
+}
+
+public class innerclass {
+
+	public static void main(String[] args) {
+		
+		Outclass outclass = new Outclass();
+		
+		Outclass.Inclass inclass = outclass.new Inclass();
+		inclass.inTest();
+		
+		outclass.usinginTest();
+		
+		Outclass.Instaticclass sinclass = new Outclass.Instaticclass();
+		sinclass.inTest();
+		sinclass.sTest();
+		Outclass.Instaticclass.sTest();
+	}
+
+}
